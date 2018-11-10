@@ -1,0 +1,19 @@
+{
+  "name": "angular-quiz-app",
+  "version": "1.0.0",
+  "description": "Quiz application using angular js",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arun32me/Angular-Quiz-App.git"
+  },
+  "author": "Arun Lalithambaran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arun32me/Angular-Quiz-App/issues"
+  },
+  "homepage": "https://github.com/arun32me/Angular-Quiz-App#readme"
+}

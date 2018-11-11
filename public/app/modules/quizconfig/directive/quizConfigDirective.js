@@ -18,19 +18,19 @@ function quizConfigDirective(getQuestFactory, ipcMain, $location) {
         }
 
         scope.startQuiz = async function() {
+            
             let data = await getQuestFactory.get(scope.config.topic);
-            // scope.$apply();
-            console.log(data);
             if(data.response_code === 0) {
                 if(data.results.length > 0) {
                     ipcMain.set('questData', data.results);
-                    $location.path('/quiz');
+                    $location.url('/quiz');
                 } else {
                     console.log('Error: no questions');
                 }
             } else {
                 console.log('error response from api');
             }
+            scope.$apply();
         }
     }
 

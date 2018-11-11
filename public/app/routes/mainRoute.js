@@ -12,7 +12,7 @@ angular.module('quizApp')
         template: '<quiz-config-directive></quiz-config-directive>'
     })
     .when('/quiz', {
-        template: ''
+        template: '<quiz-main-directive></quiz-main-directive>'
     })
     .otherwise({
         redirectTo: '/'

@@ -3,7 +3,7 @@ angular.module('quizApp')
 
 // ipcMain.$inject = [];
 function ipcMain() {
-    const data = {};
+    let data = {};
     const ipcMainObject = {
         get,
         set

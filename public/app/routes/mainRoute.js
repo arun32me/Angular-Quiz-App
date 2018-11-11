@@ -8,6 +8,12 @@ angular.module('quizApp')
     .when('/userhome', {
         template: '<user-home-directive></user-home-directive>'
     })
+    .when('/quizconfig', {
+        template: '<quiz-config-directive></quiz-config-directive>'
+    })
+    .when('/quiz', {
+        template: ''
+    })
     .otherwise({
         redirectTo: '/'
     })

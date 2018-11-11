@@ -11,7 +11,7 @@ function getQuestFactory($rootScope, $http) {
     return getQuestObject;
 
     function get(topic) {
-        const url = `https://opentdb.com/api.php?amount=10&category=${topic}`;
+        const url = `https://opentdb.com/api.php?amount=10&category=${topic}&type=multiple`;
         
 
         return new Promise(function(resolve, reject) {

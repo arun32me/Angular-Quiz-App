@@ -14,6 +14,9 @@ angular.module('quizApp')
     .when('/quiz', {
         template: '<quiz-main-directive></quiz-main-directive>'
     })
+    .when('/result', {
+        template: '<result-directive></result-directive>'
+    })
     .otherwise({
         redirectTo: '/'
     })

@@ -3,6 +3,9 @@
     min-height: 300px;
     /* border: 1px solid gray; */
 }
+.active {
+    background-color: green;
+}
 </style>
 <div class="quizMain">
     <div class="answers"><span>{{ quest.questNo + 1 }}</span><br>{{quest.ans}}<br>
@@ -14,7 +17,7 @@
         
         <button ng-click="previousQuestion()">Previous Question</button>
         <button ng-click="nextQuestion()">Next Question</button>
-        <button ng-if="options.finish" ng-click="viewSkipped()">Finish Quiz</button>
+        <button ng-if="options.finish" ng-class="{active : options.viewSkipped == true}" ng-click="toggleViewSkipped()">View Skipped</button>
         <button ng-if="options.finish" ng-click="finish()">Finish Quiz</button>
     </div>
 </div>

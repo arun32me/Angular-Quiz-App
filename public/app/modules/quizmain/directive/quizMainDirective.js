@@ -12,6 +12,10 @@ function quizMainDirective($location, ipcMain) {
     return quizMainObject;
 
     function link(scope, element, attr) {
+        scope.options = {
+            finish: false,
+            viewSkipped: false
+        }
         let questNo = 0;
         let viewSkippedOnly = false;
         const questData = ipcMain.get('questData');
@@ -23,20 +27,40 @@ function quizMainDirective($location, ipcMain) {
         }
         function init() {
             scope.quest = questData[questNo];
-            scope.options = {
-                finish: false
-            }
         }
         scope.finish = function() {
             ipcMain.set('result', questData);
             $location.path('/result');
         }
         scope.nextQuestion = function() {
-            if(questNo < questData.length - 1) {
-                ++questNo;
-                init();
-            } else {
+            questNo += 1;
+            if(questNo === questData.length - 1) {
                 scope.options.finish = true;
+                
+            }
+            if(questNo === questData.length) {
+                questNo = 0;
+            }
+            if(scope.options.viewSkipped) {
+                var start = questNo;
+                for(let i = questNo; i < questData.length; i++) {
+                    if(questData[i].selected == 'null') {
+                        questNo = i;
+                        init();
+                        break;
+                    }
+                    if(i === questData.length - 1) {
+                        console.log('end of array loop');
+                        i = 0;
+                    }
+                    if(i != start) {
+                        continue;
+                    }
+                    break
+                    
+                }
+            } else {
+                init();
             }
         }
         scope.previousQuestion = function() {
@@ -45,8 +69,8 @@ function quizMainDirective($location, ipcMain) {
                 init();
             }
         }
-        scope.viewSkipped = function() {
-
+        scope.toggleViewSkipped = function() {
+            scope.options.viewSkipped = !scope.options.viewSkipped;
         }
     }
 }

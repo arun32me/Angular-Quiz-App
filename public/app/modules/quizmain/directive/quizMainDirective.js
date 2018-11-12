@@ -13,6 +13,7 @@ function quizMainDirective($location, ipcMain) {
 
     function link(scope, element, attr) {
         let questNo = 0;
+        let viewSkippedOnly = false;
         const questData = ipcMain.get('questData');
        
         if(questData) {
@@ -43,6 +44,9 @@ function quizMainDirective($location, ipcMain) {
                 --questNo;
                 init();
             }
+        }
+        scope.viewSkipped = function() {
+
         }
     }
 }

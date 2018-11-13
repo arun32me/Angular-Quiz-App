@@ -17,7 +17,6 @@ function quizMainDirective($location, ipcMain) {
             viewSkipped: false
         }
         let questNo = 0;
-        let viewSkippedOnly = false;
         const questData = ipcMain.get('questData');
        
         if(questData) {
@@ -33,6 +32,7 @@ function quizMainDirective($location, ipcMain) {
             $location.path('/result');
         }
         scope.nextQuestion = function() {
+            var start = questNo;
             questNo += 1;
             if(questNo === questData.length - 1) {
                 scope.options.finish = true;
@@ -42,30 +42,61 @@ function quizMainDirective($location, ipcMain) {
                 questNo = 0;
             }
             if(scope.options.viewSkipped) {
-                var start = questNo;
-                for(let i = questNo; i < questData.length; i++) {
+                console.log('skip loop begin');
+                var i = questNo;
+                while(true) {
                     if(questData[i].selected == 'null') {
+                        console.log('found');
                         questNo = i;
                         init();
+                        break;
+                    }
+                    console.log('skipped');
+                    if(i === start) {
+                        console.log('start point reached');
                         break;
                     }
                     if(i === questData.length - 1) {
                         console.log('end of array loop');
                         i = 0;
                     }
-                    if(i != start) {
-                        continue;
-                    }
-                    break
-                    
+                    i++;
                 }
             } else {
                 init();
             }
         }
         scope.previousQuestion = function() {
-            if(questNo > 0) {
-                --questNo;
+            var start = questNo;
+            questNo -= 1;
+            if(questNo < 0) {
+                scope.options.finish = true;
+            }
+            if(questNo < 0) {
+                questNo = questData.length - 1;
+            }
+            if(scope.options.viewSkipped) {
+                console.log('skip loop begin');
+                var i = questNo;
+                while(true) {
+                    if(questData[i].selected == 'null') {
+                        console.log('found');
+                        questNo = i;
+                        init();
+                        break;
+                    }
+                    console.log('skipped');
+                    if(i === start) {
+                        console.log('start point reached');
+                        break;
+                    }
+                    if(i <= 0) {
+                        console.log('end of array loop');
+                        i = questData.length - 1;
+                    }
+                    i--;
+                }
+            } else {
                 init();
             }
         }

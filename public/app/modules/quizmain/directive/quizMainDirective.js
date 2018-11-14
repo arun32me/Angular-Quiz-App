@@ -32,19 +32,20 @@ function quizMainDirective($location, ipcMain, $rootScope) {
             $('#exampleModal').modal('hide');
             
                 for(let i = 0; i < questData.length; i++) {
-                    for(let j = 0; j < questData[i].options.length; j++) {
-                        if(questData[i].selected === 'null' && scope.warnMsg === false) {
-                            scope.warnMsg = true;
-                            let err = {
-                                scope: scope,
-                                msg: "You have skipped one or more questions. Please close this window if you want to check them out."
-                            }
-                            $rootScope.$broadcast('errorMessage', err);
-                            return true;
+                    if(questData[i].selected === 'null' && scope.warnMsg === false) {
+                        scope.warnMsg = true;
+                        let err = {
+                            scope: scope,
+                            msg: "You have skipped one or more questions. Please close this window if you want to check them out."
                         }
+                        $rootScope.$broadcast('errorMessage', err);
+                        return true;
+                    }
+                    if(i === questData.length - 1) {
+                        scope.warnMsg = true;
+                        break;
                     }
                 }
-            console.log('finish');
             if(scope.warnMsg === true) {
                 ipcMain.set('result', questData);
                 $location.path('/result');

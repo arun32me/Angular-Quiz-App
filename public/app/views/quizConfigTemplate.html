@@ -1,5 +1,17 @@
+<style>
+    .quizConfig {
+        width: 400px;
+        border: 1px solid gray;
+        text-align: center;
+        margin: auto;
+        position: relative;
+        padding: 10px;
+    }
+</style>
+
 <link rel="stylesheet" type="text/css" href="css/loadingspinner.css">
 <div class="quizConfig">
+    <h3>Please select the topic</h3>
     <form ng-submit="startQuiz()">
         
         <input type="radio" ng-model="config.topic" value="21" name="topic" id="topic1">

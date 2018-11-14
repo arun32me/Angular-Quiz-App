@@ -87,8 +87,6 @@ function quizMainDirective($location, ipcMain, $rootScope) {
             questNo -= 1;
             if(questNo < 0) {
                 scope.options.finish = true;
-            }
-            if(questNo < 0) {
                 questNo = questData.length - 1;
             }
             if(scope.options.viewSkipped) {
@@ -102,10 +100,10 @@ function quizMainDirective($location, ipcMain, $rootScope) {
                     if(i === start) {
                         break;
                     }
+                    i -= 1;
                     if(i <= 0) {
                         i = questData.length - 1;
                     }
-                    i--;
                 }
             } else {
                 init();

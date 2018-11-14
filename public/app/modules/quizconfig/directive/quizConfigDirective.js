@@ -18,7 +18,7 @@ function quizConfigDirective(getQuestFactory, ipcMain, $location) {
         }
 
         scope.startQuiz = async function() {
-            
+            scope.loadingScreen = true;
             let data = await getQuestFactory.get(scope.config.topic);
             if(data.response_code === 0) {
                 if(data.results.length > 0) {
@@ -64,5 +64,4 @@ function quizConfigDirective(getQuestFactory, ipcMain, $location) {
             return booklet;
         }
     }
-
 }

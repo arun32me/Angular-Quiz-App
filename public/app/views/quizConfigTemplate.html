@@ -1,34 +1,36 @@
 <style>
     .quizConfig {
-        width: 400px;
-        border: 1px solid gray;
+        /* width: 400px; */
+        /* border: 1px solid gray; */
         text-align: center;
         margin: auto;
         position: relative;
         padding: 10px;
+        margin-top: 50px;
     }
+    
 </style>
 
 <link rel="stylesheet" type="text/css" href="css/loadingspinner.css">
 <div class="quizConfig">
     <h3>Please select the topic</h3>
     <form ng-submit="startQuiz()">
-        
+        <div style="width:250px; text-align:left; margin:auto">
         <input type="radio" ng-model="config.topic" value="21" name="topic" id="topic1">
         <label for="topic1">Sports</label>
-        
+        <br>
         <input type="radio" ng-model="config.topic" value="9"  name="topic" id="topic2">
         <label for="topic2">General Knowledge</label>
-        
+        <br>
         
         <input type="radio" ng-model="config.topic" value="17"  name="topic" id="topic3">
         <label for="topic3">Science</label>
-        
+        <br>
         <input type="radio" ng-model="config.topic" value="27"  name="topic" id="topic4">
         <label for="topic4">Animals</label>
-
+    </div>
         <br>
-        <input ng-disabled="loadingScreen" type="submit" value="Start Now">
+        <input class="btn btn-primary my-2" ng-disabled="loadingScreen" type="submit" value="Start Now">
     </form>
 </div>
 

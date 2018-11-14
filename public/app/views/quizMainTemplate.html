@@ -1,23 +1,45 @@
 <style>
-.answers {
+    .answers {
     min-height: 300px;
     /* border: 1px solid gray; */
 }
 .active {
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid green;
     background-color: green;
+    color: #fff;
 }
+.quizMain {
+    /* border: 1px solid gray; */
+    max-width: 1000px;
+    margin: auto;
+}
+.simplebtn {
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
 </style>
 <div class="quizMain">
-    <div class="answers"><span>{{ quest.questNo + 1 }}</span><br>{{quest.ans}}<br>
-        <h3 ng-bind="quest.question"></h3>
-            <ul>
-                <li ng-repeat="op in quest.options track by $index"><input type="radio" name="answer" id="{{op}}" ng-model="quest.selected" value="{{ op }}"><label for="{{ op }}">{{ op }}</label></li>
-            </ul>
-        </div>
-        
-        <button ng-click="previousQuestion()">Previous Question</button>
-        <button ng-click="nextQuestion()">Next Question</button>
-        <button ng-if="options.finish" ng-class="{active : options.viewSkipped == true}" ng-click="toggleViewSkipped()">View Skipped</button>
-        <button ng-if="options.finish" ng-click="finish()">Finish Quiz</button>
+    <div class="answers"><span>
+            <h3>{{ quest.questNo + 1 }} . {{ quest.question }}</h3><br>
+            <div ng-repeat="op in quest.options track by $index" class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="{{op}}" name="answer" ng-model="quest.selected"
+                    value="{{ op }}">
+                <label class="custom-control-label" for="{{ op }}">{{ op }}</label>
+            </div>
     </div>
+    <br>
+    <button class="text-left" ng-click="previousQuestion()">Previous Question</button>
+    <button class="float-right" ng-click="nextQuestion()">Next Question</button><br>
+    <div class="text-center">
+        <button class="btn btn-primary my-2" ng-if="options.finish" ng-click="finish()">Finish Quiz</button>
+    </div>
+    <div ng-if="options.finish">
+    <h4>Filter options</h4>
+    <button ng-class="{active : options.viewSkipped == true}" ng-click="toggleViewSkipped()">View Skipped Questions Only</button>
+</div>
 </div>

@@ -5,3 +5,11 @@ body {
   color: #fff;
   text-decoration: none;
 }
+.opBox {
+  position: fixed;
+  right: 10px;
+  width: 100px;
+  height: 50px;
+  border: 1px solid gray;
+  top: 200px;
+}

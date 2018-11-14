@@ -8,7 +8,7 @@
 }
 </style>
 <div class="quizMain">
-    <!-- <div class="answers"><span>{{ quest.questNo + 1 }}</span><br>{{quest.ans}}<br> -->
+    <div class="answers"><span>{{ quest.questNo + 1 }}</span><br>{{quest.ans}}<br>
         <h3 ng-bind="quest.question"></h3>
             <ul>
                 <li ng-repeat="op in quest.options track by $index"><input type="radio" name="answer" id="{{op}}" ng-model="quest.selected" value="{{ op }}"><label for="{{ op }}">{{ op }}</label></li>

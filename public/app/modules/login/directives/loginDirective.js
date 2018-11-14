@@ -2,8 +2,8 @@
 angular.module('quizApp')
 .directive('loginDirective', loginDirective);
 
-loginDirective.$inject = ['authenticationFactory'];
-function loginDirective(authenticationFactory) {
+loginDirective.$inject = ['authenticationFactory', '$location'];
+function loginDirective(authenticationFactory, $location) {
     return {
         templateUrl: 'app/views/loginTemplate.html',
         link: link
@@ -17,8 +17,13 @@ function loginDirective(authenticationFactory) {
             }
         }
         init();
+        scope.loginErr = false;
         scope.auth = function() {
-            authenticationFactory.login(scope.user);
+            if(authenticationFactory.login(scope.user)) {
+                $location.path('/userhome');
+            } else {
+                scope.loginErr = true;
+            }
         }
     }
 }

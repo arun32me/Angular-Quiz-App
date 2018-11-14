@@ -48,17 +48,18 @@ function quizConfigDirective(getQuestFactory, ipcMain, $location) {
 
                 function getOptions() {
                     let op = [];
+                    let t = 0;
                     let r = Math.floor(Math.random() * 4);
                     for(let j = 0; j < 4; j++) {
                         if(j === r) {
                             op.push(data[i].correct_answer);
+                            t = 1;
                             continue;
                         }
-                        op.push(data[i].incorrect_answers[j]);
+                        op.push(data[i].incorrect_answers[j - t]);
                     }
                     return op;
                 }
-
             }
             return booklet;
         }

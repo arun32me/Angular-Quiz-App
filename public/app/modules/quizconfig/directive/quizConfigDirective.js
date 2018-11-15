@@ -13,29 +13,59 @@ function quizConfigDirective(getQuestFactory, ipcMain, $location) {
 
     function link(scope, element, attr) {
 
-        scope.config = {
-            topic : '21'
-        }
+        scope.config = [
+            {
+                id: '21',
+                subject: 'Sports',
+                selected: false
+            },
+            {
+                id: '9',
+                subject: 'General Knowledge',
+                selected: false
+            },
+            {
+                id: '17',
+                subject: 'Science',
+                selected: false
+            },
+            {
+                id: '27',
+                subject: 'Animals',
+                selected: false
+            }
+        ];
 
         scope.startQuiz = async function() {
             scope.loadingScreen = true;
-            let data = await getQuestFactory.get(scope.config.topic);
-            if(data.response_code === 0) {
-                if(data.results.length > 0) {
-                    let qBook = prepareQuestion(data.results);
+            let data;
+            let category = [];
+            for(let i = 0; i < scope.config.length; i++) {
+                if(scope.config[i].selected) {
+                    category.push(getQuestFactory.get(scope.config[i].id));
+                }
+            }
+            if(category.length === 0) {
+                console.log('No items selected!');
+                scope.loadingScreen = false;
+                return 0;
+            }
+            await Promise.all(category).then(function(values) {
+                data = values;
+            });
+                if(data.length > 0) {
+                    let qBook = prepareQuestion(data);
                     ipcMain.set('questData', qBook);
                     $location.url('/quiz');
                 } else {
                     console.log('Error: no questions');
                 }
-            } else {
-                console.log('error response from api');
-            }
-            scope.$apply();
+           scope.$apply();
         }
-        function prepareQuestion(data) {
+        function prepareQuestion(dataset) {
             let booklet = [];
-
+            for(let k = 0; k < dataset.length; k++) {
+                let data = dataset[k].results;
             for(let i = 0; i < data.length; i++) {
                 let question = {
                     questNo: i,
@@ -61,6 +91,7 @@ function quizConfigDirective(getQuestFactory, ipcMain, $location) {
                     return op;
                 }
             }
+        }
             return booklet;
         }
     }

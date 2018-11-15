@@ -28,7 +28,7 @@ angular.module('quizApp')
             if(!authenticationFactory.isLogged()) {
                 $location.path('/login');
             }
-        }else if(authenticationFactory.isLogged() && nextRoute.$$route.originalPath === '/') {
+        } else if(authenticationFactory.isLogged() && nextRoute.$$route.originalPath === '/') {
             $location.path('/userhome');
             // $location.path(currentRoute.$$route.originalPath);
         }

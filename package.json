@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/arun32me/Angular-Quiz-App/issues"
   },
-  "homepage": "https://github.com/arun32me/Angular-Quiz-App#readme"
+  "homepage": "https://github.com/arun32me/Angular-Quiz-App#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
